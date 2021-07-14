@@ -1,10 +1,6 @@
 const fs = require('fs');
 
-function parseDate() {
-    let date = new Date(), r = '';
-
-
-}
+const parseDate = () => new Date().toLocaleString()
 
 fs.writeFileSync('./out/current.txt', parseDate(), {
     encoding: 'utf-8'
