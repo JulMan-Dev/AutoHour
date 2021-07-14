@@ -1,0 +1,33 @@
+name: Auto update date
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  connection-tests:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Additional setup
+        run: |
+          git config --local user.email "null@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Update
+        run: node src
+
+      - name: Commit results
+        run: |
+          git add out
+          git commit -m "Update date"
+          git push
